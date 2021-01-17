@@ -19,6 +19,10 @@
   "keywords": [],
   "author": "Romello Goodman",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/romellogoodman/goodgraphics.js.git"
+  },
   "source": "index.js",
   "main": "dist/goodgraphics.js",
   "exports": "dist/goodgraphics.modern.js",
