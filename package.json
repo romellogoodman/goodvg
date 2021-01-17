@@ -1,0 +1,77 @@
+{
+  "name": "goodgraphics",
+  "version": "0.0.0",
+  "description": "A library for creating svgs.",
+  "scripts": {
+    "build": "microbundle",
+    "dev": "microbundle watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.12.11",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.17.0",
+    "husky": "^4.3.7",
+    "lint-staged": "^10.5.3",
+    "microbundle": "^0.13.0",
+    "prettier": "^2.2.1"
+  },
+  "keywords": [],
+  "author": "Romello Goodman",
+  "license": "MIT",
+  "source": "index.js",
+  "main": "dist/goodgraphics.js",
+  "exports": "dist/goodgraphics.modern.js",
+  "module": "dist/goodgraphics.module.js",
+  "unpkg": "dist/goodgraphics.umd.js",
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true,
+      "jest": true
+    },
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "comma-dangle": 0,
+      "indent": 0,
+      "lodash/import-scope": [
+        2,
+        "method"
+      ],
+      "max-len": 0,
+      "no-console": 1,
+      "no-unused-vars": 1,
+      "object-curly-spacing": [
+        2,
+        "never"
+      ],
+      "operator-linebreak": 0,
+      "prettier/prettier": "error",
+      "space-before-function-paren": 0
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,json,md}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "singleQuote": true
+  }
+}
