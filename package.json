@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "A library for creating svgs.",
   "scripts": {
-    "build": "microbundle",
     "dev": "microbundle watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "microbundle",
+    "lint": "eslint .",
+    "test": "echo \"TODO: tests\"",
+    "prepublish": "npm run lint && npm test && npm run build"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.12.11",
