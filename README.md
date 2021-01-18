@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/goodgraphics.svg)](https://badge.fury.io/js/goodgraphics)
 
-A library for creating svgs. Learn more at [goodgraphics.xyz/about](goodgraphics.xyz/about).
+A library for creating svgs. Learn more at [https://goodgraphics.xyz/about](goodgraphics.xyz/about).
 
 ### Install
 
