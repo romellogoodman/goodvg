@@ -4,6 +4,16 @@
 
 A library for creating svgs. Learn more at [goodgraphics.xyz/about](https://goodgraphics.xyz/about).
 
+Pros
+
+- chainable api
+- zero dependencies
+- made with ❤️
+
+Cons
+
+- none! :)
+
 ### Install
 
 ```
