@@ -1,7 +1,7 @@
 import {convertAttributes} from './utils';
 
 export default class Graphic {
-  constructor({attributes, height, width, target} = {}) {
+  constructor({attributes, container, height, width} = {}) {
     // const helpers = {map, spline, times};
 
     // Object.keys(helpers).forEach((helper) => {
@@ -35,7 +35,7 @@ export default class Graphic {
     this.contents = [];
     this.height = height || 200;
     this.width = width || 200;
-    this.target = target || 'body';
+    this.container = container || 'body';
     this.attributes = attributes || {};
   }
 
@@ -44,7 +44,7 @@ export default class Graphic {
    */
 
   draw() {
-    const target = document.querySelector(this.target);
+    const container = document.querySelector(this.container);
     const getMarkup = (contents) => {
       return `
       <svg
@@ -57,10 +57,10 @@ export default class Graphic {
       `;
     };
 
-    if (target) {
-      target.innerHTML = getMarkup(this.contents);
+    if (container) {
+      container.innerHTML = getMarkup(this.contents);
     } else {
-      console.log('WARN: no target');
+      console.log('WARN: no container');
     }
 
     return this;
@@ -73,7 +73,7 @@ export default class Graphic {
   }
 
   remove() {
-    document.querySelector(`${this.target} .goodgraphics`).remove();
+    document.querySelector(`${this.container} .goodgraphics`).remove();
 
     return this;
   }

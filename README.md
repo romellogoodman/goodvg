@@ -55,7 +55,7 @@ svg.circle('50%', '50%', 50).draw();
 
 Creates a new instance for all drawing methods. `options` is a JavaScript object with the following properties:
 
-- `@param {String} target` Selector or DOM element used as container for the SVG. Defaults to 'body'.
+- `@param {String} container` Selector or DOM element used as container for the SVG. Defaults to 'body'.
 - `@param {Number} height` Height of the svg. Defaults to 200.
 - `@param {Number} width` Width of the svg. Defaults to 200.
 - `@param {Object} attributes` tk.
