@@ -25,56 +25,56 @@ svg.circle('50%', '50%', 50).draw();
 
 ## Methods
 
-## class Graphic () { }
+### class Graphic () { }
 
 `constructor({attributes, height, width, target})` - tk
 
 tk
 
-## draw() { }
+### draw() { }
 
 tk
 
-## remove() { }
+### remove() { }
 
 tk
 
-## redraw() { }
+### redraw() { }
 
 tk
 
-## circle(x, y, d, opts) { }
+### circle(x, y, d, opts) { }
 
 tk
 
-## rect(x, y, height, width, opts) { }
+### rect(x, y, height, width, opts) { }
 
 tk
 
-## square(x, y, size, opts) { }
+### square(x, y, size, opts) { }
 
 tk
 
-## line() { }
+### line() { }
 
 tk
 
-## polyline() { }
+### polyline() { }
 
 tk
 
-## map(number, inMin, inMax, outMin, outMax) { }
+### map(number, inMin, inMax, outMin, outMax) { }
 
 tk
 
-## spline() { }
+### spline() { }
 
 tk
 
-## times(number, draw) { }
+### times(number, draw) { }
 
 tk
 
-## grid(cols, rows, draw) { }
+### grid(cols, rows, draw) { }
 
 tk
