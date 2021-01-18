@@ -14,10 +14,26 @@ Cons
 
 - none! :)
 
+## Table of contents
+
+- [Usage](#usage)
+- [API](#api)
+- [Contributing](#contributing)
+
+## Usage
+
 ### Install
+
+npm
 
 ```
 npm i goodgraphics
+```
+
+unpkg
+
+```
+<script src="https://unpkg.com/goodgraphics"></script>
 ```
 
 ### Use
@@ -33,58 +49,84 @@ const svg = new Graphic({
 svg.circle('50%', '50%', 50).draw();
 ```
 
-## Methods
+## API
 
-### class Graphic () { }
+### `new Graphic(options)`
 
-`constructor({attributes, height, width, target})` - tk
+Creates a new instance for all drawing methods. `options` is a JavaScript object with the following properties:
 
-tk
+- `@param {String} target` Selector or DOM element used as container for the SVG. Defaults to 'body'.
+- `@param {Number} height` Height of the svg. Defaults to 200.
+- `@param {Number} width` Width of the svg. Defaults to 200.
+- `@param {Object} attributes` tk.
 
-### draw() { }
+### `draw()`
 
-tk
+Draws the svg.
 
-### remove() { }
+### `remove()`
 
-tk
+Removes the svg.
 
-### redraw() { }
+### `redraw()`
 
-tk
+Re-draws the svg.
 
-### circle(x, y, d, opts) { }
+### `circle(x, y, d, opts)`
 
-tk
+- `@param {String | Number} x` The x position for the shape.
+- `@param {String | Number} y` The y position for the shape.
+- `@param {String | Number} d` The diameter of the shape.
+- `@param {String | Number} opts` tk.
 
-### rect(x, y, height, width, opts) { }
+### `rect(x, y, height, width, opts)`
 
-tk
+- `@param {String | Number} x` The x position for the shape.
+- `@param {String | Number} y` The y position for the shape.
+- `@param {String | Number} height` The height of the shape.
+- `@param {String | Number} width` The width of the shape.
+- `@param {String | Number} opts` tk.
 
-### square(x, y, size, opts) { }
+### `square(x, y, size, opts)`
 
-tk
+- `@param {String | Number} x` The x position for the shape.
+- `@param {String | Number} y` The y position for the shape.
+- `@param {String | Number} size` The size of the square.
+- `@param {String | Number} opts` tk.
 
-### line() { }
-
-tk
-
-### polyline() { }
-
-tk
-
-### map(number, inMin, inMax, outMin, outMax) { }
-
-tk
-
-### spline() { }
-
-tk
-
-### times(number, draw) { }
+### `line()`
 
 tk
 
-### grid(cols, rows, draw) { }
+### `polyline()`
 
 tk
+
+### `map(number, inMin, inMax, outMin, outMax)`
+
+Maps a value from one range to another.
+
+- `@param {Number} number` The number to map.
+- `@param {Number} inMin` The min for the first range.
+- `@param {Number} inMax` The max for the first range.
+- `@param {Number} outMin` The min for the second range.
+- `@param {Number} outMax` The max for the second range.
+
+### `spline()`
+
+tk
+
+### `times(number, draw)`
+
+Runs the draw function x number of times.
+
+- `@param {Number} number` The number of times to run the loop.
+- `@param {Function} draw` The draw function. Called with the arguments tk.
+
+### `grid(cols, rows, draw)`
+
+tk
+
+## Contributing
+
+All contributors and all contributions both big and small are welcome in this project.
