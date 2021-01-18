@@ -72,19 +72,27 @@ Removes the svg.
 
 Re-draws the svg.
 
-### `circle(x, y, d, opts)`
+### `circle(x, y, radius, opts)`
 
 - `@param {String | Number} x` The x position for the shape.
 - `@param {String | Number} y` The y position for the shape.
-- `@param {String | Number} d` The diameter of the shape.
+- `@param {String | Number} radius` The radius of the shape.
 - `@param {String | Number} opts` tk.
 
-### `rect(x, y, height, width, opts)`
+### `ellipse(x, y, width, height, opts)`
 
 - `@param {String | Number} x` The x position for the shape.
 - `@param {String | Number} y` The y position for the shape.
-- `@param {String | Number} height` The height of the shape.
 - `@param {String | Number} width` The width of the shape.
+- `@param {String | Number} height` The height of the shape.
+- `@param {String | Number} opts` tk.
+
+### `rect(x, y, width, height, opts)`
+
+- `@param {String | Number} x` The x position for the shape.
+- `@param {String | Number} y` The y position for the shape.
+- `@param {String | Number} width` The width of the shape.
+- `@param {String | Number} height` The height of the shape.
 - `@param {String | Number} opts` tk.
 
 ### `square(x, y, size, opts)`
@@ -94,13 +102,22 @@ Re-draws the svg.
 - `@param {String | Number} size` The size of the square.
 - `@param {String | Number} opts` tk.
 
-### `line()`
+### `line(x1, y1, x2, y2, opts)`
 
-tk
+- `@param {String | Number} x1` The x position of the start of the line.
+- `@param {String | Number} y1` The y position of the start of the line.
+- `@param {String | Number} x2` The x position of the end of the line.
+- `@param {String | Number} y2` The y position of the end of the line.
+- `@param {String | Number} opts` tk.
 
 ### `polyline()`
 
 tk
+
+### `group(draw, opts)`
+
+- `@param {Function} draw` The draw function. Called with the arguments tk.
+- `@param {String | Number} opts` tk.
 
 ### `map(number, inMin, inMax, outMin, outMax)`
 

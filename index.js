@@ -16,6 +16,8 @@ export default class Graphic {
       'add',
       'circle',
       'draw',
+      'ellipse',
+      'group',
       'grid',
       'line',
       'map',
@@ -73,7 +75,16 @@ export default class Graphic {
   }
 
   remove() {
-    document.querySelector(`${this.container} .goodgraphics`).remove();
+    const selector = `${this.container} .goodgraphics`;
+    const element = document.querySelector(selector);
+
+    if (element) {
+      element.remove();
+    } else {
+      console.log(
+        `WARN: unable to remove element. Check your selector: ${selector}`
+      );
+    }
 
     return this;
   }
@@ -89,11 +100,11 @@ export default class Graphic {
    * Shapes Functions
    */
 
-  circle(x, y, d, opts = {}) {
+  circle(x, y, radius, opts = {}) {
     this.add(
       `<circle
         cx="${x}" cy="${y}"
-        r=${d / 2}
+        r=${radius}
         ${convertAttributes(opts)}
       />`
     );
@@ -101,11 +112,21 @@ export default class Graphic {
     return this;
   }
 
-  rect(x, y, height, width, opts = {}) {
+  ellipse(x, y, width, height, opts = {}) {
+    this.add(
+      `<ellipse
+        cx="${x}" cy="${y}"
+        rx="${width}" ry="${height}"
+        ${convertAttributes(opts)}
+      />`
+    );
+  }
+
+  rect(x, y, width, height, opts = {}) {
     this.add(
       `<rect
-        x="${x}px" y="${y}px"
-        height="${height}px" width="${width}px"
+        x="${x}" y="${y}"
+        height="${height}" width="${width}"
         ${convertAttributes(opts)}
       />`
     );
@@ -119,9 +140,14 @@ export default class Graphic {
     return this;
   }
 
-  line() {
-    console.log('line');
-    this.add('line');
+  line(x1, y1, x2, y2, opts = {}) {
+    this.add(
+      `<line
+        x1="${x1}" y1="${y1}"
+        x2="${x2}" y2="${y2}"
+        ${convertAttributes(opts)}
+      />`
+    );
 
     return this;
   }
@@ -129,6 +155,16 @@ export default class Graphic {
   polyline() {
     console.log('polyline');
     this.add('polyline');
+
+    return this;
+  }
+
+  group(draw, opts = {}) {
+    this.add(`<g ${convertAttributes(opts)}>`);
+
+    draw(this);
+
+    this.add('</g>');
 
     return this;
   }

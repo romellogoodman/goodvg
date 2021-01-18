@@ -1,6 +1,9 @@
 const validAttributes = {
   fill: 'fill',
+  stroke: 'stroke',
+  strokeWidth: 'stroke-width',
   style: 'style',
+  transform: 'transform',
 };
 
 export const convertAttributes = (attribs = {}) => {
