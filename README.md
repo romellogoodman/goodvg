@@ -7,7 +7,6 @@ A library for creating svgs. Learn more at [goodgraphics.xyz/about](https://good
 Pros
 
 - chainable api
-- zero dependencies
 - made with ❤️
 
 Cons
@@ -110,14 +109,42 @@ Re-draws the svg.
 - `@param {String | Number} y2` The y position of the end of the line.
 - `@param {String | Number} opts` tk.
 
-### `polyline()`
+### `polyline(points, opts)`
 
-tk
+- `@param {Array [Strings]} points` Series of points on the line.
+- `@param {String | Number} opts` tk.
 
 ### `group(draw, opts)`
 
 - `@param {Function} draw` The draw function. Called with the arguments tk.
 - `@param {String | Number} opts` tk.
+
+```js
+// TODO: how to use tk
+```
+
+### `times(number, draw)`
+
+Runs the draw function x number of times.
+
+- `@param {Number} number` The number of times to run the loop.
+- `@param {Function} draw` The draw function. Called with the arguments tk.
+
+```js
+// TODO: how to use tk
+```
+
+### `grid(cols, rows, draw)`
+
+tk
+
+```js
+// TODO: how to use tk
+```
+
+## Non-Chainable Utils
+
+The following are not chainable
 
 ### `map(number, inMin, inMax, outMin, outMax)`
 
@@ -129,18 +156,14 @@ Maps a value from one range to another.
 - `@param {Number} outMin` The min for the second range.
 - `@param {Number} outMax` The max for the second range.
 
+### `random(min, max)`
+
+Get a random number between two numbers.
+
+- `@param {Number} min` The min of the range.
+- `@param {Number} max` The max of the range.
+
 ### `spline()`
-
-tk
-
-### `times(number, draw)`
-
-Runs the draw function x number of times.
-
-- `@param {Number} number` The number of times to run the loop.
-- `@param {Function} draw` The draw function. Called with the arguments tk.
-
-### `grid(cols, rows, draw)`
 
 tk
 

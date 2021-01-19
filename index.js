@@ -152,9 +152,8 @@ export default class Graphic {
     return this;
   }
 
-  polyline() {
-    console.log('polyline');
-    this.add('polyline');
+  polyline(points, opts = {}) {
+    this.add(`<polyline points="${points}" ${convertAttributes(opts)} />`);
 
     return this;
   }
@@ -170,22 +169,8 @@ export default class Graphic {
   }
 
   /**
-   * Helper Functions
+   * "Series" Functions (TBD on the name)
    */
-
-  /**
-   * Map a number from one range to another range
-   * https://gist.github.com/xposedbones/75ebaef3c10060a3ee3b246166caab56
-   */
-  map(number, inMin, inMax, outMin, outMax) {
-    return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
-  }
-
-  spline() {
-    console.log('spline tk');
-
-    return this;
-  }
 
   times(number, draw) {
     for (let x = 0; x < number; x++) {
@@ -210,5 +195,25 @@ export default class Graphic {
     }
 
     return this;
+  }
+
+  /**
+   * Helper Functions
+   */
+
+  /**
+   * Map a number from one range to another range
+   * https://gist.github.com/xposedbones/75ebaef3c10060a3ee3b246166caab56
+   */
+  map(number, inMin, inMax, outMin, outMax) {
+    return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+  }
+
+  spline() {
+    return [];
+  }
+
+  random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 }
