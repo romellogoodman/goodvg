@@ -1,4 +1,6 @@
-import {convertAttributes} from './utils';
+import {convertAttributes, downloadURL} from './utils';
+
+const className = 'goodgraphics';
 
 export default class Graphic {
   constructor({attributes, container, height, width} = {}) {
@@ -25,6 +27,7 @@ export default class Graphic {
       'rect',
       'redraw',
       'remove',
+      'save',
       'spline',
       'square',
       'times',
@@ -50,7 +53,7 @@ export default class Graphic {
     const getMarkup = (contents) => {
       return `
       <svg
-        xmlns="http://www.w3.org/2000/svg" class="goodgraphics"
+        xmlns="http://www.w3.org/2000/svg" class="${className}"
         height="${this.height}" width="${this.width}"
         ${convertAttributes(this.attributes)}
       >
@@ -169,7 +172,7 @@ export default class Graphic {
   }
 
   /**
-   * "Series" Functions (TBD on the name)
+   * Loop Functions
    */
 
   times(number, draw) {
@@ -180,17 +183,24 @@ export default class Graphic {
     return this;
   }
 
-  // TODO: implement? - height, width, margin, draw
-  grid(cols, rows, draw) {
+  grid(
+    {columns, rows, height = this.height, width = this.width, margin = 0} = {},
+    draw
+  ) {
     for (let row = 0; row < rows; row++) {
-      for (let col = 0; col < cols; col++) {
-        // const halfMargin = margin / 2
-        // const posX = map(colIndex, 0, columns, halfMargin, height - halfMargin)
-        // const posY  = map(rowIndex, 0, rows, halfMargin, width - halfMargin)
-        // const cellHeight = (height - margin) / rows
-        // const cellWidth = (width - margin) / columns
+      for (let col = 0; col < columns; col++) {
+        const halfMargin = margin / 2;
+        const posX = this.map(col, 0, columns, halfMargin, height - halfMargin);
+        const posY = this.map(row, 0, rows, halfMargin, width - halfMargin);
+        const cellHeight = (height - margin) / rows;
+        const cellWidth = (width - margin) / columns;
 
-        draw(this, {col, row});
+        draw(this, {
+          posX,
+          posY,
+          cellHeight,
+          cellWidth,
+        });
       }
     }
 
@@ -200,6 +210,36 @@ export default class Graphic {
   /**
    * Helper Functions
    */
+
+  save(fileName) {
+    const svg = document.querySelector(`${this.container} .${className}`);
+    const img = new Image();
+
+    img.onload = function () {
+      const canvas = document.createElement('canvas');
+      const height = this.height * 2;
+      const width = this.width * 2;
+
+      canvas.height = height;
+      canvas.width = width;
+
+      canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+
+      const url = canvas.toDataURL('image/png');
+
+      downloadURL(fileName, url);
+    };
+
+    // NOTE: Another way to encode the svg
+    // const xml = new XMLSerializer().serializeToString(svg);
+    // const svg64 = btoa(xml); //for utf8: btoa(unescape(encodeURIComponent(xml)))
+    // const b64start = 'data:image/svg+xml;base64,';
+    // const b64start = 'data:image/svg+xml;charset=utf-8,';
+    // const image64 = b64start + svg64;
+    // img.src = image64;
+
+    img.src = `data:image/svg+xml;utf8,${encodeURIComponent(svg.outerHTML)}`;
+  }
 
   /**
    * Map a number from one range to another range

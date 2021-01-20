@@ -114,6 +114,8 @@ Re-draws the svg.
 - `@param {Array [Strings]} points` Series of points on the line.
 - `@param {String | Number} opts` tk.
 
+## API Methods
+
 ### `group(draw, opts)`
 
 - `@param {Function} draw` The draw function. Called with the arguments tk.
@@ -134,7 +136,17 @@ Runs the draw function x number of times.
 // TODO: how to use tk
 ```
 
-### `grid(cols, rows, draw)`
+### `grid(options, draw)`
+
+Draw items across a grid. `options` is A JavaScript object with the following properties:
+
+- `@param {Function} draw` The draw function. Called with the arguments tk.
+- `@param {Object} options` A JavaScript object with the following properties:
+- `@param {Number} options.columns` The number of columns.
+- `@param {Number} options.rows` The number of rows.
+- `@param {Number} options.height` Height of the svg. Defaults to svg's height.
+- `@param {Number} options.width` Width of the svg. Defaults to svg's width.
+- `@param {Number} options.margin` tk. Defaults to 0.
 
 tk
 
@@ -142,9 +154,15 @@ tk
 // TODO: how to use tk
 ```
 
-## Non-Chainable Utils
+## Non-Chainable API Methods
 
-The following are not chainable
+The following are not chainable.
+
+### `save(fileName)`
+
+Save the svg as a png.
+
+- `@param {String} fileName` The name of the file name.
 
 ### `map(number, inMin, inMax, outMin, outMax)`
 

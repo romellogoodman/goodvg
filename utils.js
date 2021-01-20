@@ -1,4 +1,5 @@
 const validAttributes = {
+  clipPath: 'clip-path',
   fill: 'fill',
   stroke: 'stroke',
   strokeWidth: 'stroke-width',
@@ -17,4 +18,15 @@ export const convertAttributes = (attribs = {}) => {
   });
 
   return result;
+};
+
+export const downloadURL = (name, url) => {
+  const link = document.createElement('a');
+
+  link.download = name;
+  link.href = url;
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 };
