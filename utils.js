@@ -2,6 +2,7 @@ const validAttributes = {
   clipPath: 'clip-path',
   fill: 'fill',
   stroke: 'stroke',
+  strokeDasharray: 'stroke-dasharray',
   strokeWidth: 'stroke-width',
   style: 'style',
   transform: 'transform',

@@ -249,8 +249,82 @@ export default class Graphic {
     return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
   }
 
-  spline() {
-    return [];
+  /**
+   * Generate a smooth continuous curve based on the points, using bezier curves.
+   * spline() will return an svg path-data string. The arguments are (points, tension, close).
+   * Play with tension and check out the effect!
+   * https://github.com/georgedoescode/splinejs/blob/main/spline.js
+   */
+  spline(points = [], tension = 1, close = false, callback) {
+    function formatPoints(points, close) {
+      points = [...points];
+      // so that coords can be passed as objects or arrays
+      if (!Array.isArray(points[0])) {
+        points = points.map(({x, y}) => [x, y]);
+      }
+
+      if (close) {
+        const lastPoint = points[points.length - 1];
+        const secondToLastPoint = points[points.length - 2];
+
+        const firstPoint = points[0];
+        const secondPoint = points[1];
+
+        points.unshift(lastPoint);
+        points.unshift(secondToLastPoint);
+
+        points.push(firstPoint);
+        points.push(secondPoint);
+      }
+
+      return points.flat();
+    }
+
+    points = formatPoints(points, close);
+
+    const size = points.length;
+    const last = size - 4;
+
+    const startPointX = close ? points[2] : points[0];
+    const startPointY = close ? points[3] : points[1];
+
+    let path = 'M' + [startPointX, startPointY];
+
+    if (callback) {
+      callback('MOVE', [startPointX, startPointY]);
+    }
+
+    const startIteration = close ? 2 : 0;
+    const maxIteration = close ? size - 4 : size - 2;
+    const inc = 2;
+
+    for (let i = startIteration; i < maxIteration; i += inc) {
+      const x0 = i ? points[i - 2] : points[0];
+      const y0 = i ? points[i - 1] : points[1];
+
+      const x1 = points[i + 0];
+      const y1 = points[i + 1];
+
+      const x2 = points[i + 2];
+      const y2 = points[i + 3];
+
+      const x3 = i !== last ? points[i + 4] : x2;
+      const y3 = i !== last ? points[i + 5] : y2;
+
+      const cp1x = x1 + ((x2 - x0) / 6) * tension;
+      const cp1y = y1 + ((y2 - y0) / 6) * tension;
+
+      const cp2x = x2 - ((x3 - x1) / 6) * tension;
+      const cp2y = y2 - ((y3 - y1) / 6) * tension;
+
+      path += 'C' + [cp1x, cp1y, cp2x, cp2y, x2, y2];
+
+      if (callback) {
+        callback('CURVE', [cp1x, cp1y, cp2x, cp2y, x2, y2]);
+      }
+    }
+
+    return path;
   }
 
   random(min, max) {
