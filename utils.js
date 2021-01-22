@@ -1,21 +1,10 @@
-const validAttributes = {
-  clipPath: 'clip-path',
-  fill: 'fill',
-  stroke: 'stroke',
-  strokeDasharray: 'stroke-dasharray',
-  strokeWidth: 'stroke-width',
-  style: 'style',
-  transform: 'transform',
-};
-
 export const convertAttributes = (attribs = {}) => {
   let result = '';
 
   Object.keys(attribs).forEach((attrib) => {
     const property = attribs[attrib];
-    const validAttrib = validAttributes[attrib];
 
-    if (validAttrib) result += ` ${validAttrib}="${property}"`;
+    result += ` ${attrib}="${property}"`;
   });
 
   return result;
