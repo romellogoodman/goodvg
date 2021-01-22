@@ -181,9 +181,16 @@ Get a random number between two numbers.
 - `@param {Number} min` The min of the range.
 - `@param {Number} max` The max of the range.
 
-### `spline()`
+### `spline(points = [], tension = 1, close = false, callback) {)`
 
-tk
+- `@param {Array [Object]} points` Series of points with an x and y value.
+- `@param {Number} tension` tk.
+- `@param {Boolean} close` tk.
+- `@param {Func} callback` tk.
+
+```js
+// TODO: how to use tk
+```
 
 ## Contributing
 
