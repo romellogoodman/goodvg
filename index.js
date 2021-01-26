@@ -23,11 +23,13 @@ export default class Graphic {
       'grid',
       'line',
       'map',
+      'markup',
       'polyline',
       'rect',
       'redraw',
       'remove',
       'save',
+      'setAttributes',
       'spline',
       'square',
       'times',
@@ -50,20 +52,9 @@ export default class Graphic {
 
   draw() {
     const container = document.querySelector(this.container);
-    const getMarkup = (contents) => {
-      return `
-      <svg
-        xmlns="http://www.w3.org/2000/svg" class="${className}"
-        height="${this.height}" width="${this.width}"
-        ${convertAttributes(this.attributes)}
-      >
-        ${contents.join('\n')}
-      </svg>
-      `;
-    };
 
     if (container) {
-      container.innerHTML = getMarkup(this.contents);
+      container.innerHTML = this.markup(this, className);
     } else {
       console.log('WARN: no container');
     }
@@ -175,6 +166,12 @@ export default class Graphic {
    * Loop Functions
    */
 
+  setAttributes(attributes = {}) {
+    this.attributes = {...this.attributes, ...attributes};
+
+    return this;
+  }
+
   times(number, draw) {
     for (let x = 0; x < number; x++) {
       draw(this, x);
@@ -211,8 +208,46 @@ export default class Graphic {
    * Helper Functions
    */
 
-  save(fileName) {
+  markup() {
+    return `
+      <svg
+        xmlns="http://www.w3.org/2000/svg" class="${className}"
+        height="${this.height}" width="${this.width}"
+        ${convertAttributes(this.attributes)}
+      >
+        ${this.contents.join('\n')}
+      </svg>
+      `;
+  }
+
+  save(fileName, isPng) {
     const svg = document.querySelector(`${this.container} .${className}`);
+    const svgText = `data:image/svg+xml;utf8,${encodeURIComponent(
+      svg.outerHTML
+    )}`;
+
+    if (isPng) {
+      this.savePNG(fileName, svgText);
+    } else {
+      this.saveSVG(fileName, svgText);
+    }
+  }
+
+  saveSVG(fileName, svgText) {
+    const link = document.createElement('a');
+
+    link.setAttribute('href', svgText);
+    link.setAttribute('download', fileName);
+
+    link.style.display = 'none';
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+  }
+
+  savePNG(fileName, svgText) {
     const img = new Image();
 
     img.onload = function () {
@@ -238,7 +273,7 @@ export default class Graphic {
     // const image64 = b64start + svg64;
     // img.src = image64;
 
-    img.src = `data:image/svg+xml;utf8,${encodeURIComponent(svg.outerHTML)}`;
+    img.src = svgText;
   }
 
   /**

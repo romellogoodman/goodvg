@@ -116,6 +116,24 @@ Re-draws the svg.
 
 ## API Methods
 
+### `add(str)`
+
+- `@param {String} str` The string to add.
+
+```js
+// TODO: how to use tk
+```
+
+### `setAttributes(attributes)`
+
+Update the global attributes for the svg.
+
+- `@param {Object} attributes` An object of attributes.
+
+### `markup()`
+
+- `@return {String}` The html markup for the svg.
+
 ### `group(draw, opts)`
 
 - `@param {Function} draw` The draw function. Called with the arguments tk.
@@ -158,11 +176,12 @@ tk
 
 The following are not chainable.
 
-### `save(fileName)`
+### `save(fileName, isPng)`
 
 Save the svg as a png.
 
 - `@param {String} fileName` The name of the file name.
+- `@param {Boolean} fileName` Save the file as a `.svg` or `.png`.
 
 ### `map(number, inMin, inMax, outMin, outMax)`
 
@@ -181,11 +200,11 @@ Get a random number between two numbers.
 - `@param {Number} min` The min of the range.
 - `@param {Number} max` The max of the range.
 
-### `spline(points = [], tension = 1, close = false, callback) {)`
+### `spline(points, tension, close, callback) {)`
 
-- `@param {Array [Object]} points` Series of points with an x and y value.
-- `@param {Number} tension` tk.
-- `@param {Boolean} close` tk.
+- `@param {Array [Object]} points` Series of points with an x and y value. Defaults to `[]`.
+- `@param {Number} tension` tk. Defaults to `1`.
+- `@param {Boolean} close` tk. Defaults to `false`
 - `@param {Func} callback` tk.
 
 ```js
