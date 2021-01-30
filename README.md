@@ -114,6 +114,11 @@ Re-draws the svg.
 - `@param {Array [Strings]} points` Series of points on the line.
 - `@param {String | Number} opts` tk.
 
+### `path(d, opts)`
+
+- `@param {Array [Strings]} d` tk.
+- `@param {String | Number} opts` tk.
+
 ## API Methods
 
 ### `add(str)`

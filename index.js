@@ -24,6 +24,7 @@ export default class Graphic {
       'line',
       'map',
       'markup',
+      'path',
       'polyline',
       'rect',
       'redraw',
@@ -130,6 +131,12 @@ export default class Graphic {
 
   square(x, y, size, opts = {}) {
     this.rect(x, y, size, size, opts);
+
+    return this;
+  }
+
+  path(d, opts = {}) {
+    this.add(`<path d="${d}" ${convertAttributes(opts)}/>`);
 
     return this;
   }
