@@ -245,20 +245,20 @@ export default class Graphic {
       `;
   }
 
-  save(fileName, isPng) {
+  save(fileName, isPng, opts) {
     const svg = document.querySelector(`${this.container} .${className}`);
     const svgText = `data:image/svg+xml;utf8,${encodeURIComponent(
       svg.outerHTML
     )}`;
 
     if (isPng) {
-      this.savePNG(fileName, svgText);
+      this.savePNG(fileName, svgText, opts);
     } else {
-      this.saveSVG(fileName, svgText);
+      this.saveSVG(fileName, svgText, opts);
     }
   }
 
-  saveSVG(fileName, svgText) {
+  saveSVG(fileName, svgText, opts) {
     const link = document.createElement('a');
 
     link.setAttribute('href', svgText);
@@ -272,13 +272,13 @@ export default class Graphic {
     document.body.removeChild(link);
   }
 
-  savePNG(fileName, svgText) {
+  savePNG(fileName, svgText, opts) {
     const img = new Image();
 
     img.onload = function () {
       const canvas = document.createElement('canvas');
-      const height = this.height * 2;
-      const width = this.width * 2;
+      const height = opts.height || this.height * 2;
+      const width = opts.width || this.width * 2;
 
       canvas.height = height;
       canvas.width = width;
