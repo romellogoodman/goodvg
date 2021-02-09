@@ -50,7 +50,7 @@ Creates a new instance for all drawing methods. `options` is a JavaScript object
 - `@param {String} container` Selector or DOM element used as container for the SVG. Defaults to 'body'.
 - `@param {Number} height` Height of the svg. Defaults to 200.
 - `@param {Number} width` Width of the svg. Defaults to 200.
-- `@param {Object} attributes` tk.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
 ### `draw()`
 
@@ -64,81 +64,81 @@ Removes the svg.
 
 Re-draws the svg.
 
-### `circle(x, y, radius, opts)`
+### `circle(x, y, radius, attributes)`
 
 - `@param {String | Number} x` The x position for the shape.
 - `@param {String | Number} y` The y position for the shape.
 - `@param {String | Number} radius` The radius of the shape.
-- `@param {String | Number} opts` tk.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
-### `ellipse(x, y, width, height, opts)`
-
-- `@param {String | Number} x` The x position for the shape.
-- `@param {String | Number} y` The y position for the shape.
-- `@param {String | Number} width` The width of the shape.
-- `@param {String | Number} height` The height of the shape.
-- `@param {String | Number} opts` tk.
-
-### `rect(x, y, width, height, opts)`
+### `ellipse(x, y, width, height, attributes)`
 
 - `@param {String | Number} x` The x position for the shape.
 - `@param {String | Number} y` The y position for the shape.
 - `@param {String | Number} width` The width of the shape.
 - `@param {String | Number} height` The height of the shape.
-- `@param {String | Number} opts` tk.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
-### `square(x, y, size, opts)`
+### `rect(x, y, width, height, attributes)`
+
+- `@param {String | Number} x` The x position for the shape.
+- `@param {String | Number} y` The y position for the shape.
+- `@param {String | Number} width` The width of the shape.
+- `@param {String | Number} height` The height of the shape.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
+
+### `square(x, y, size, attributes)`
 
 - `@param {String | Number} x` The x position for the shape.
 - `@param {String | Number} y` The y position for the shape.
 - `@param {String | Number} size` The size of the square.
-- `@param {String | Number} opts` tk.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
-### `line(x1, y1, x2, y2, opts)`
+### `line(x1, y1, x2, y2, attributes)`
 
 - `@param {String | Number} x1` The x position of the start of the line.
 - `@param {String | Number} y1` The y position of the start of the line.
 - `@param {String | Number} x2` The x position of the end of the line.
 - `@param {String | Number} y2` The y position of the end of the line.
-- `@param {String | Number} opts` tk.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
-### `polyline(points, opts)`
+### `polyline(points, attributes)`
 
 - `@param {Array [Strings]} points` Series of points on the line.
-- `@param {String | Number} opts` tk.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
-### `path(d, opts)`
+### `path(commands, attributes)`
 
-- `@param {Array [Strings]} d` tk.
-- `@param {String | Number} opts` tk.
+- `@param {Array Strings} commands` An array of path commands.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
 ## Helper Functions
 
 ### `add(str)`
 
-- `@param {String} str` The string to add.
-
-```js
-// TODO: how to use tk
-```
+- `@param {String} str` The string to add. Note, this is sort of a "cheat" function.
 
 ### `setAttributes(attributes)`
 
 Update the global attributes for the svg.
 
-- `@param {Object} attributes` An object of attributes.
+- `@param {Object} attributes` Key value pairs of attributes to apply to main tag
 
 ### `markup()`
 
 - `@return {String}` The html markup for the svg.
 
-### `group(draw, opts)`
+### `group(draw, attributes)`
 
-- `@param {Function} draw` The draw function. Called with the arguments tk.
-- `@param {String | Number} opts` tk.
+- `@param {Function} draw` The draw function.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
 ```js
-// TODO: how to use tk
+svg.group(() => {
+  svg.circle('50%', '50%', '10%');
+});
+
+svg.draw();
 ```
 
 ### `times(number, draw)`
@@ -146,33 +146,39 @@ Update the global attributes for the svg.
 Runs the draw function x number of times.
 
 - `@param {Number} number` The number of times to run the loop.
-- `@param {Function} draw` The draw function. Called with the arguments tk.
+- `@param {Function} draw` The draw function.
 
 ```js
-// TODO: how to use tk
+const numberOfCircles = 4;
+
+svg.times(numberOfCircles, (index) => {
+  svg.circle(`${(index + 1) * 20}%`, '50%', '10%');
+});
+
+svg.draw();
 ```
 
 ### `grid(options, draw)`
 
 Draw items across a grid. `options` is A JavaScript object with the following properties:
 
-- `@param {Function} draw` The draw function. Called with the arguments tk.
+- `@param {Function} draw` The draw function.
 - `@param {Object} options` A JavaScript object with the following properties:
 - `@param {Number} options.columns` The number of columns.
 - `@param {Number} options.rows` The number of rows.
 - `@param {Number} options.height` Height of the svg. Defaults to svg's height.
 - `@param {Number} options.width` Width of the svg. Defaults to svg's width.
-- `@param {Number} options.margin` tk. Defaults to 0.
-
-tk
+- `@param {Number} options.margin` Margin between the edges and the grid. Defaults to 0.
 
 ```js
-// TODO: how to use tk
+svg.grid({columns: 2, rows: 2, margin: 20}, (item) => {
+  const {posX, posY, cellWidth} = item;
+
+  svg.square(posX, posY, cellWidth);
+});
+
+svg.draw();
 ```
-
-## Non-Chainable API Methods
-
-The following are not chainable.
 
 ### `save(fileName, isPng)`
 
