@@ -72,7 +72,7 @@ export default class Graphic {
     const container = document.querySelector(this.container);
 
     if (container) {
-      container.innerHTML = this.markup(this, className);
+      container.innerHTML = this.markup();
     } else {
       console.log('WARN: no container');
     }
@@ -179,16 +179,12 @@ export default class Graphic {
   group(draw, opts = {}) {
     this.add(`<g ${convertAttributes(opts)}>`);
 
-    draw(this);
+    draw();
 
     this.add('</g>');
 
     return this;
   }
-
-  /**
-   * Loop Functions
-   */
 
   setAttributes(attributes = {}) {
     this.attributes = {...this.attributes, ...attributes};
@@ -196,9 +192,12 @@ export default class Graphic {
     return this;
   }
 
+  /**
+   * Loop Functions
+   */
   times(number, draw) {
-    for (let x = 0; x < number; x++) {
-      draw(this, x);
+    for (let index = 0; index < number; index++) {
+      draw(index);
     }
 
     return this;
@@ -216,7 +215,9 @@ export default class Graphic {
         const cellHeight = (height - margin) / rows;
         const cellWidth = (width - margin) / columns;
 
-        draw(this, {
+        draw({
+          colIndex: col,
+          rowIndex: row,
           posX,
           posY,
           cellHeight,
