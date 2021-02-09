@@ -2,21 +2,12 @@
 
 [![npm version](https://badge.fury.io/js/goodgraphics.svg)](https://badge.fury.io/js/goodgraphics)
 
-A library for creating svgs. Learn more at [goodgraphics.xyz/about](https://goodgraphics.xyz/about).
-
-Pros
-
-- chainable api
-- made with ❤️
-
-Cons
-
-- none! :)
+A library for creating svgs. Explore the API reference below and read the [Getting Started](https://observablehq.com/@romellogoodman/getting-started-with-goodgraphics-js?collection=@romellogoodman/good-graphics) guide for a quick walkthrough. For more examples please visit [goodgraphics.xyz](http://goodgraphics.xyz/)
 
 ## Table of contents
 
 - [Usage](#usage)
-- [API](#api)
+- [API Reference](#api)
 - [Contributing](#contributing)
 
 ## Usage
@@ -45,7 +36,9 @@ const svg = new Graphic({
   },
 });
 
-svg.circle('50%', '50%', 50).draw();
+svg.circle('50%', '50%', 50);
+
+svg.draw();
 ```
 
 ## API
@@ -119,7 +112,7 @@ Re-draws the svg.
 - `@param {Array [Strings]} d` tk.
 - `@param {String | Number} opts` tk.
 
-## API Methods
+## Helper Functions
 
 ### `add(str)`
 
