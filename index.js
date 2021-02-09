@@ -1,19 +1,36 @@
-import {convertAttributes, downloadURL} from './utils';
+/**
+ ********************
+ * Utils
+ ********************
+ */
 
 const className = 'goodgraphics';
 
+const convertAttributes = (attribs = {}) => {
+  let result = '';
+
+  Object.keys(attribs).forEach((attrib) => {
+    const property = attribs[attrib];
+
+    result += ` ${attrib}="${property}"`;
+  });
+
+  return result;
+};
+
+const downloadURL = (name, url) => {
+  const link = document.createElement('a');
+
+  link.download = name;
+  link.href = url;
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 export default class Graphic {
   constructor({attributes, container, height, width} = {}) {
-    // const helpers = {map, spline, times};
-
-    // Object.keys(helpers).forEach((helper) => {
-    //   this[helper] = (...opts) => {
-    //     helpers[helper](opts);
-
-    //     return this;
-    //   };
-    // });
-
     const funcs = [
       'add',
       'circle',
