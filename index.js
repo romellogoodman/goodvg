@@ -245,7 +245,7 @@ export default class Graphic {
       `;
   }
 
-  save(fileName, isPng, opts) {
+  save(fileName, isPng, opts = {}) {
     const svg = document.querySelector(`${this.container} .${className}`);
     const svgText = `data:image/svg+xml;utf8,${encodeURIComponent(
       svg.outerHTML
@@ -258,7 +258,7 @@ export default class Graphic {
     }
   }
 
-  saveSVG(fileName, svgText, opts) {
+  saveSVG(fileName, svgText, opts = {}) {
     const link = document.createElement('a');
 
     link.setAttribute('href', svgText);
@@ -272,7 +272,7 @@ export default class Graphic {
     document.body.removeChild(link);
   }
 
-  savePNG(fileName, svgText, opts) {
+  savePNG(fileName, svgText, opts = {}) {
     const img = new Image();
 
     img.onload = function () {
