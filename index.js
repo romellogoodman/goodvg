@@ -186,6 +186,18 @@ export default class Graphic {
     return this;
   }
 
+  groupStart(opts = {}) {
+    this.add(`<g ${convertAttributes(opts)}>`);
+
+    return this;
+  }
+
+  groupEnd() {
+    this.add('</g>');
+
+    return this;
+  }
+
   setAttributes(attributes = {}) {
     this.attributes = {...this.attributes, ...attributes};
 
