@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/goodgraphics.svg)](https://badge.fury.io/js/goodgraphics)
 
-A library for creating svgs. Explore the API reference below and read the [Getting Started](https://observablehq.com/@romellogoodman/getting-started-with-goodgraphics-js?collection=@romellogoodman/good-graphics) guide for a quick walkthrough. For more examples please visit [goodgraphics.xyz](http://goodgraphics.xyz/)
+A library for creating SVGs. Explore the API reference below and read the [Getting Started](https://observablehq.com/@romellogoodman/getting-started-with-goodgraphics-js?collection=@romellogoodman/good-graphics) guide for a quick walkthrough. For more examples please visit [goodgraphics.xyz](http://goodgraphics.xyz/)
 
 ## Table of contents
 
