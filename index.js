@@ -222,8 +222,8 @@ export default class Graphic {
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < columns; col++) {
         const halfMargin = margin / 2;
-        const posX = this.map(col, 0, columns, halfMargin, height - halfMargin);
-        const posY = this.map(row, 0, rows, halfMargin, width - halfMargin);
+        const posX = this.map(col, 0, columns, halfMargin, width - halfMargin);
+        const posY = this.map(row, 0, rows, halfMargin, height - halfMargin);
         const cellHeight = (height - margin) / rows;
         const cellWidth = (width - margin) / columns;
 
