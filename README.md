@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/goodgraphics.svg)](https://badge.fury.io/js/goodgraphics)
 
-A library for creating SVGs. Explore the API reference below and read the [Getting Started](https://observablehq.com/@romellogoodman/getting-started-with-goodgraphics-js?collection=@romellogoodman/good-graphics) guide for a quick walkthrough. For more examples please visit [goodgraphics.xyz](http://goodgraphics.xyz/)
+A library for creating SVGs. Explore the API reference below and check out these [Good Graphics Examples](https://observablehq.com/collection/@romellogoodman/good-graphics-examples). This project is part of [goodgraphics.xyz](http://goodgraphics.xyz/)
 
 ## Table of contents
 
@@ -40,6 +40,15 @@ svg.circle('50%', '50%', 50);
 
 svg.draw();
 ```
+
+### Templates
+
+For a more light-weight solution you can fork any of the following templates and get started quicker:
+
+- [Observable Template](https://observablehq.com/@romellogoodman/goodgraphics-template)
+- [Glitch Template](https://glitch.com/edit/#!/goodgraphics-template)
+- [CodeSandbox Template](https://codesandbox.io/s/good-graphics-template-vc099?file=/index.html)
+- [CodePen Template](https://codepen.io/romellogoodman/pen/bGBaZem)
 
 ## API
 
