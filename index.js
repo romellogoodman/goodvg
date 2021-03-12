@@ -116,7 +116,7 @@ export default class Graphic {
     this.add(
       `<circle
         cx="${x}" cy="${y}"
-        r=${radius}
+        r="${radius}"
         ${convertAttributes(opts)}
       />`
     );
