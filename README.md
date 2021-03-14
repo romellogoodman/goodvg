@@ -150,6 +150,16 @@ svg.group(() => {
 svg.draw();
 ```
 
+### `groupStart(attributes)`
+
+Start the group by adding the opening tags
+
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
+
+### `groupEnd()
+
+End the group by adding the closing tags
+
 ### `times(number, draw)`
 
 Runs the draw function x number of times.
