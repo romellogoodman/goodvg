@@ -156,7 +156,7 @@ Start the group by adding the opening tags
 
 - `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
-### `groupEnd()
+### `groupEnd()`
 
 End the group by adding the closing tags
 
