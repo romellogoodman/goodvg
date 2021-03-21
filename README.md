@@ -59,6 +59,7 @@ Creates a new instance for all drawing methods. `options` is a JavaScript object
 - `@param {String} container` Selector or DOM element used as container for the SVG. Defaults to 'body'.
 - `@param {Number} height` Height of the svg. Defaults to 200.
 - `@param {Number} width` Width of the svg. Defaults to 200.
+- `@param {String} viewBox` viewbox of the svg. Defaults to `0 0 width height`.
 - `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
 ### `draw()`
