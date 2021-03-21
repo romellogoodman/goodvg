@@ -30,7 +30,7 @@ const downloadURL = (name, url) => {
 };
 
 export default class Graphic {
-  constructor({attributes, container, height, width} = {}) {
+  constructor({attributes, container, height, width, viewBox} = {}) {
     const funcs = [
       'add',
       'circle',
@@ -60,6 +60,7 @@ export default class Graphic {
     this.contents = [];
     this.height = height || 200;
     this.width = width || 200;
+    this.viewBox = viewBox || `0 0 ${width} ${height}`;
     this.container = container || 'body';
     this.attributes = attributes || {};
   }
@@ -250,6 +251,7 @@ export default class Graphic {
       <svg
         xmlns="http://www.w3.org/2000/svg" class="${className}"
         height="${this.height}" width="${this.width}"
+        viewBox="${this.viewBox}"
         ${convertAttributes(this.attributes)}
       >
         ${this.contents.join('\n')}
