@@ -161,12 +161,13 @@ Start the group by adding the opening tags
 
 End the group by adding the closing tags
 
-### `times(number, draw)`
+### `times(number, draw, attributes)`
 
 Runs the draw function x number of times.
 
 - `@param {Number} number` The number of times to run the loop.
 - `@param {Function} draw` The draw function.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
 ```js
 const numberOfCircles = 4;
@@ -178,7 +179,7 @@ svg.times(numberOfCircles, (index) => {
 svg.draw();
 ```
 
-### `grid(options, draw)`
+### `grid(options, draw, attributes)`
 
 Draw items across a grid. `options` is A JavaScript object with the following properties:
 
@@ -189,6 +190,9 @@ Draw items across a grid. `options` is A JavaScript object with the following pr
 - `@param {Number} options.height` Height of the svg. Defaults to svg's height.
 - `@param {Number} options.width` Width of the svg. Defaults to svg's width.
 - `@param {Number} options.margin` Margin between the edges and the grid. Defaults to 0.
+- `@param {String | Number} options.x` The x position for the grid.
+- `@param {String | Number} options.y` The y position for the grid.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
 ```js
 svg.grid({columns: 2, rows: 2, margin: 20}, (item) => {
@@ -206,6 +210,34 @@ Save the svg as a png.
 
 - `@param {String} fileName` The name of the file name.
 - `@param {Boolean} fileName` Save the file as a `.svg` or `.png`.
+
+### lerp(a, b, percent)
+
+Find the middle number between two numbers.
+
+```js
+lerp(0, 100, 0.5); // returns 50
+```
+
+### lerpColor()
+
+Find the middle color between two (hex format) colors.
+
+```js
+lerpColor('#000000', '#ffffff', 0.5); // returns #7F7F7F
+```
+
+### degrees(radians)
+
+Convert a number radians to degrees
+
+### radians(degrees)
+
+Convert a number degrees to radians
+
+### constrain(amount, min, max)
+
+Constrain a number between two numbers;
 
 ### `map(number, inMin, inMax, outMin, outMax)`
 

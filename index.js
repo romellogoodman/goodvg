@@ -384,18 +384,18 @@ export default class Graphic {
   /**
    * Taken from https://gist.github.com/rosszurowski/67f04465c424a9bc0dae
    * A linear interpolator for hexadecimal colors
-   * lerpColor('#000000', '#ffffff', 0.5) // returns #7F7F7F
-   * @param {String} a
-   * @param {String} b
+   *
+   * @param {String} colorA
+   * @param {String} colorB
    * @param {Number} amount
    * @returns {String}
    */
-  lerpColor(a, b, amount) {
-    const ah = parseInt(a.replace(/#/g, ''), 16);
+  lerpColor(colorA, colorB, amount) {
+    const ah = parseInt(colorA.replace(/#/g, ''), 16);
     const ar = ah >> 16;
     const ag = (ah >> 8) & 0xff;
     const ab = ah & 0xff;
-    const bh = parseInt(b.replace(/#/g, ''), 16);
+    const bh = parseInt(colorB.replace(/#/g, ''), 16);
     const br = bh >> 16;
     const bg = (bh >> 8) & 0xff;
     const bb = bh & 0xff;
