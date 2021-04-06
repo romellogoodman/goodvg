@@ -34,19 +34,28 @@ export default class Graphic {
     const funcs = [
       'add',
       'circle',
+      'constrain',
+      'degrees',
       'draw',
       'ellipse',
       'group',
-      'grid',
+      'groupEnd',
+      'groupStart',
+      'lerp',
+      'lerpColor',
       'line',
       'map',
       'markup',
       'path',
       'polyline',
+      'radians',
+      'random',
       'rect',
       'redraw',
       'remove',
       'save',
+      'savePNG',
+      'saveSVG',
       'setAttributes',
       'spline',
       'square',
@@ -70,6 +79,8 @@ export default class Graphic {
    */
 
   draw() {
+    if (typeof window === 'undefined' || !window || !window.document) return;
+
     const container = document.querySelector(this.container);
 
     if (container) {
@@ -208,18 +219,39 @@ export default class Graphic {
   /**
    * Loop Functions
    */
-  times(number, draw) {
+  times(number, draw, opts = {}) {
+    this.groupStart(opts);
+
     for (let index = 0; index < number; index++) {
       draw(index);
     }
+
+    this.groupEnd();
 
     return this;
   }
 
   grid(
-    {columns, rows, height = this.height, width = this.width, margin = 0} = {},
-    draw
+    {
+      x,
+      y,
+      columns,
+      rows,
+      height = this.height,
+      width = this.width,
+      margin = 0,
+    } = {},
+    draw,
+    opts = {}
   ) {
+    const at = {};
+
+    if (x && y && !opts.transform) {
+      at.transform = `translate(${x}, ${y})`;
+    }
+
+    this.groupStart({...opts, ...at});
+
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < columns; col++) {
         const halfMargin = margin / 2;
@@ -238,6 +270,8 @@ export default class Graphic {
         });
       }
     }
+
+    this.groupEnd();
 
     return this;
   }
@@ -315,12 +349,64 @@ export default class Graphic {
     img.src = svgText;
   }
 
+  // Math helpers
+  lerp(a, b, percent) {
+    return a * (1 - percent) + b * percent;
+  }
+
+  constrain(amount, min, max) {
+    if (amount < min) return min;
+    if (amount > max) return max;
+
+    return amount;
+  }
+
+  radians(degrees) {
+    return (degrees / 360) * (Math.PI * 2);
+  }
+
+  degrees(radians) {
+    return (radians / (Math.PI * 2)) * 360;
+  }
+
+  random(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
   /**
    * Map a number from one range to another range
    * https://gist.github.com/xposedbones/75ebaef3c10060a3ee3b246166caab56
    */
   map(number, inMin, inMax, outMin, outMax) {
     return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+  }
+
+  /**
+   * Taken from https://gist.github.com/rosszurowski/67f04465c424a9bc0dae
+   * A linear interpolator for hexadecimal colors
+   * lerpColor('#000000', '#ffffff', 0.5) // returns #7F7F7F
+   * @param {String} a
+   * @param {String} b
+   * @param {Number} amount
+   * @returns {String}
+   */
+  lerpColor(a, b, amount) {
+    const ah = parseInt(a.replace(/#/g, ''), 16);
+    const ar = ah >> 16;
+    const ag = (ah >> 8) & 0xff;
+    const ab = ah & 0xff;
+    const bh = parseInt(b.replace(/#/g, ''), 16);
+    const br = bh >> 16;
+    const bg = (bh >> 8) & 0xff;
+    const bb = bh & 0xff;
+    const rr = ar + amount * (br - ar);
+    const rg = ag + amount * (bg - ag);
+    const rb = ab + amount * (bb - ab);
+
+    return (
+      '#' +
+      (((1 << 24) + (rr << 16) + (rg << 8) + rb) | 0).toString(16).slice(1)
+    );
   }
 
   /**
@@ -399,9 +485,5 @@ export default class Graphic {
     }
 
     return path;
-  }
-
-  random(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 }
