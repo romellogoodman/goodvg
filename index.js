@@ -246,7 +246,7 @@ export default class Graphic {
   ) {
     const at = {};
 
-    if (x && y && !opts.transform) {
+    if ((x || x === 0) && (y || y === 0) && !opts.transform) {
       at.transform = `translate(${x}, ${y})`;
     }
 
