@@ -104,6 +104,15 @@ Re-draws the svg.
 - `@param {String | Number} size` The size of the square.
 - `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
+### `triangle(x, y, height, attributes)`
+
+NOTE: Using translate in `attributes.transform` might collide with the translation that the shape naturally does.
+
+- `@param {String | Number} x` The x position for the shape.
+- `@param {String | Number} y` The y position for the shape.
+- `@param {String | Number} size` The size of the triangle.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
+
 ### `line(x1, y1, x2, y2, attributes)`
 
 - `@param {String | Number} x1` The x position of the start of the line.

@@ -164,6 +164,23 @@ export default class Graphic {
     return this;
   }
 
+  triangle(x, y, size, opts = {}) {
+    const height = size * (Math.sqrt(3) / 2);
+    const points = [
+      [0, -height / 2],
+      [-size / 2, height / 2],
+      [size / 2, height / 2],
+      [0, -height / 2],
+    ];
+
+    this.polyline(points, {
+      ...opts,
+      transform: `${opts.transform || ''} translate(${x} ${y})`,
+    });
+
+    return this;
+  }
+
   path(d, opts = {}) {
     this.add(`<path d="${d}" ${convertAttributes(opts)}/>`);
 
