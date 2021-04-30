@@ -60,6 +60,7 @@ export default class Graphic {
       'spline',
       'square',
       'times',
+      'triangle',
     ];
 
     funcs.forEach((func) => {
