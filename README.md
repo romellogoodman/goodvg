@@ -113,6 +113,11 @@ NOTE: Using translate in `attributes.transform` might collide with the translati
 - `@param {String | Number} size` The size of the triangle.
 - `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
+### `polygon(points, attributes)`
+
+- `@param {Array [Strings]} points` Series of points to form the shape.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
+
 ### `line(x1, y1, x2, y2, attributes)`
 
 - `@param {String | Number} x1` The x position of the start of the line.

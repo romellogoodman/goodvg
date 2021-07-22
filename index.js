@@ -47,6 +47,7 @@ export default class Graphic {
       'map',
       'markup',
       'path',
+      'polygon',
       'polyline',
       'radians',
       'random',
@@ -204,6 +205,10 @@ export default class Graphic {
     this.add(`<polyline points="${points}" ${convertAttributes(opts)} />`);
 
     return this;
+  }
+
+  polygon(points, opts = {}) {
+    this.add(`<polygon points="${points}" ${convertAttributes(opts)} />`);
   }
 
   group(draw, opts = {}) {
