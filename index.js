@@ -33,6 +33,7 @@ export default class Graphic {
   constructor({attributes, container, height, width, viewBox} = {}) {
     const funcs = [
       'add',
+      'bigger',
       'circle',
       'constrain',
       'degrees',
@@ -58,6 +59,7 @@ export default class Graphic {
       'savePNG',
       'saveSVG',
       'setAttributes',
+      'smaller',
       'spline',
       'square',
       'times',
@@ -394,6 +396,14 @@ export default class Graphic {
 
   random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
+  }
+
+  smaller(numberOne, numberTwo) {
+    return numberOne < numberTwo ? numberOne : numberTwo;
+  }
+
+  bigger(numberOne, numberTwo) {
+    return numberOne > numberTwo ? numberOne : numberTwo;
   }
 
   /**

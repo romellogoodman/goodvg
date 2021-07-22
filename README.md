@@ -270,6 +270,20 @@ Get a random number between two numbers.
 - `@param {Number} min` The min of the range.
 - `@param {Number} max` The max of the range.
 
+### `smaller(numberOne, numberTwo)`
+
+Get the smaller number between two numbers.
+
+- `@param {Number} numberOne` The first number to compare.
+- `@param {Number} numberTwo` The second number to compare.
+
+### `bigger(numberOne, numberTwo)`
+
+Get the bigger number between two numbers.
+
+- `@param {Number} numberOne` The first number to compare.
+- `@param {Number} numberTwo` The second number to compare.
+
 ### `spline(points, tension, close, callback) {)`
 
 - `@param {Array [Object]} points` Series of points with an x and y value. Defaults to `[]`.
