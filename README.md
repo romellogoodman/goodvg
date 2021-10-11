@@ -140,7 +140,13 @@ NOTE: Using translate in `attributes.transform` might collide with the translati
 
 ### `add(str)`
 
-- `@param {String} str` The string to add. Note, this is sort of a "cheat" function.
+Manually add markup to `this.content`. Note, this is sort of a "cheat/catch-all" function.
+
+- `@param {String} str` The string to add.
+
+### `empty()`
+
+Empties `this.content` and resets the Graphic.
 
 ### `setAttributes(attributes)`
 

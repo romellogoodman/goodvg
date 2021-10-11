@@ -39,6 +39,7 @@ export default class Graphic {
       'degrees',
       'draw',
       'ellipse',
+      'empty',
       'group',
       'groupEnd',
       'groupStart',
@@ -98,6 +99,12 @@ export default class Graphic {
 
   add(str) {
     this.contents.push(str);
+
+    return this;
+  }
+
+  empty() {
+    this.contents = [];
 
     return this;
   }
