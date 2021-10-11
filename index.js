@@ -72,9 +72,9 @@ export default class Graphic {
     });
 
     this.contents = [];
-    this.height = height || 200;
-    this.width = width || 200;
-    this.viewBox = viewBox || `0 0 ${width} ${height}`;
+    this.height = height || 800;
+    this.width = width || 800;
+    this.viewBox = viewBox || `0 0 ${this.width} ${this.height}`;
     this.container = container || 'body';
     this.attributes = attributes || {};
   }
