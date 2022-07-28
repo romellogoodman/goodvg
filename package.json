@@ -7,6 +7,7 @@
     "build": "microbundle",
     "lint": "eslint .",
     "test": "jest",
+    "prepublish": "npm run lint && npm test && npm run build",
     "examples": "eleventy --input=examples --serve --port=3000"
   },
   "devDependencies": {

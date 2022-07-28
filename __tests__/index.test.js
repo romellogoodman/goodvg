@@ -20,7 +20,7 @@
  ****************************************
  */
 
-const Graphic = require('../index').default;
+const {Graphic} = require('../src/index').default;
 
 describe('circle', () => {
   test('should match snapshot', () => {
