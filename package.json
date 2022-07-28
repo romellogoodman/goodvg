@@ -7,9 +7,10 @@
     "build": "microbundle",
     "lint": "eslint .",
     "test": "jest",
-    "prepublish": "npm run lint && npm test && npm run build"
+    "examples": "eleventy --input=examples --serve --port=3000"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^1.0.1",
     "@babel/preset-env": "^7.13.12",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.22.0",
@@ -22,7 +23,7 @@
     "microbundle": "^0.13.0",
     "prettier": "^2.2.1"
   },
-  "source": "index.js",
+  "source": "src/index.js",
   "main": "dist/goodgraphics.js",
   "module": "dist/goodgraphics.module.js",
   "unpkg": "dist/goodgraphics.umd.js",
@@ -42,6 +43,9 @@
   },
   "eslintConfig": {
     "extends": "react",
+    "parserOptions": {
+      "sourceType": "module"
+    },
     "plugins": [
       "prettier"
     ],
@@ -84,6 +88,5 @@
   "prettier": {
     "bracketSpacing": false,
     "singleQuote": true
-  },
-  "dependencies": {}
+  }
 }

@@ -29,7 +29,7 @@ const downloadURL = (name, url) => {
   document.body.removeChild(link);
 };
 
-export default class Graphic {
+class Graphic {
   constructor({attributes, container, height, width, viewBox} = {}) {
     const funcs = [
       'add',
@@ -527,3 +527,5 @@ export default class Graphic {
     return path;
   }
 }
+
+export default Graphic;
