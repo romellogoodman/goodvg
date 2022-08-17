@@ -177,7 +177,7 @@ NOTE: Using translate in `attributes.transform` might collide with the translati
 
 ### `group(draw, attributes)`
 
-Group the markup into a div or g element based on the Graphic's type.
+Group the markup into a div or g element based on the Graphic's template.
 
 - `@param {Function} draw` The draw function.
 - `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
