@@ -59,7 +59,6 @@ export default {
     'li',
     'link',
     'main',
-    'map',
     'mark',
     'meter',
     'nav',

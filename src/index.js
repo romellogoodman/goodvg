@@ -62,10 +62,11 @@ class Graphic {
     this.attributes = attributes || {};
     this.container = container || 'body';
     this.contents = {head: [], body: []};
-    this.height = height || 1200;
     this.template = template || 'svg';
-    this.viewBox = viewBox || `0 0 ${this.width} ${this.height}`;
+
+    this.height = height || 1200;
     this.width = width || 1200;
+    this.viewBox = viewBox || `0 0 ${this.width} ${this.height}`;
 
     // Create the functions for each tag
     const createTagAPI = (location, list) => {
@@ -304,7 +305,7 @@ class Graphic {
     });
   }
 
-  group(content) {
+  group(content, attributes = {}) {
     this.constructTag({
       attributes: {...attributes},
       content,
@@ -316,12 +317,12 @@ class Graphic {
   /**
    * Loop Functions
    */
-  times(number, draw, opts = {}) {
+  times(number, draw, attributes = {}) {
     this.group(() => {
       for (let index = 0; index < number; index++) {
         draw(index);
       }
-    });
+    }, attributes);
 
     return this;
   }
@@ -337,11 +338,11 @@ class Graphic {
       margin = 0,
     } = {},
     draw,
-    opts = {}
+    attributes = {}
   ) {
     const at = {};
 
-    if ((x || x === 0) && (y || y === 0) && !opts.transform) {
+    if ((x || x === 0) && (y || y === 0) && !attributes.transform) {
       at.transform = `translate(${x}, ${y})`;
     }
 
@@ -378,7 +379,7 @@ class Graphic {
           }
         }
       },
-      {...opts, ...at}
+      {...attributes, ...at}
     );
 
     return this;
