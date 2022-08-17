@@ -1,6 +1,6 @@
 {
   "name": "goodgraphics",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "A library for scripting SVGs.",
   "scripts": {
     "dev": "microbundle watch",
