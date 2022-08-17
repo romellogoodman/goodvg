@@ -29,8 +29,6 @@ unpkg
 ### Use
 
 ```js
-// Example 1
-// Using the Graphic API
 const svg = new Graphic({
   attributes: {
     fill: 'white',
@@ -39,22 +37,6 @@ const svg = new Graphic({
 });
 
 svg.circle('50%', '50%', 50);
-
-// Grab the markup for use
-const markup = svg.markup();
-
-// Or draw the markup
-svg.draw();
-
-// Example 2
-// Using the Markup API
-const page = new Markup();
-
-page.h1('hello world');
-
-const markup = page.markup();
-
-page.draw();
 ```
 
 ### Templates
@@ -86,6 +68,7 @@ Creates a new instance for all drawing methods. `options` is a JavaScript object
 - `@param {Number} width` Width of the svg. Defaults to 200.
 - `@param {String} viewBox` viewbox of the svg. Defaults to `0 0 width height`.
 - `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
+- `@param {Object} template` The type of Graphic, Options: `html`, `svg` (Default).
 
 ### `draw()`
 
@@ -98,6 +81,37 @@ Removes the svg.
 ### `redraw()`
 
 Re-draws the svg.
+
+### `empty()`
+
+Empties the markup and resets the Graphic's contents.
+
+## HTML Element/Tag API
+
+### `$tag(content, attributes)`
+
+The library supports a majorty of html tags as the primary interface. For all of them we attempt to guess the location of where to add the tag in either the head or body. These functions are a wrapper around `this.head` and `this.body`. Note: In the future we might need to add functionality to allow people to choose the location.
+
+- `@param {String} content` The content of the element.
+- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
+
+To nest elements pass content as a function.
+
+```js
+const page = new SCRIPT();
+
+page.ul(() => {
+  page.li([
+    //
+    page.span('item'),
+    page.span('1'),
+  ]);
+
+  page.li('item 2');
+
+  page.li('item 3');
+});
+```
 
 ### `circle(x, y, radius, attributes)`
 
@@ -161,29 +175,9 @@ NOTE: Using translate in `attributes.transform` might collide with the translati
 - `@param {Array Strings} commands` An array of path commands.
 - `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
-## Helper Functions
-
-### `add(str)`
-
-Manually add markup to `this.content`. Note, this is sort of a "cheat/catch-all" function.
-
-- `@param {String} str` The string to add.
-
-### `empty()`
-
-Empties `this.content` and resets the Graphic.
-
-### `setAttributes(attributes)`
-
-Update the global attributes for the svg.
-
-- `@param {Object} attributes` Key value pairs of attributes to apply to main tag
-
-### `markup()`
-
-- `@return {String}` The html markup for the svg.
-
 ### `group(draw, attributes)`
+
+Group the markup into a div or g element based on the Graphic's type.
 
 - `@param {Function} draw` The draw function.
 - `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
@@ -196,15 +190,15 @@ svg.group(() => {
 svg.draw();
 ```
 
-### `groupStart(attributes)`
+### `head(content)` and `body(content)`
 
-Start the group by adding the opening tags
+### `setAttributes(attributes)`
 
-- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
+Update the global attributes for the Graphic in the top-level svg ot html tag.
 
-### `groupEnd()`
+Manually add markup to `this.content.$location`. Note, this is sort of a "cheat/catch-all" function.
 
-End the group by adding the closing tags
+## Helper Functions
 
 ### `times(number, draw, attributes)`
 
@@ -249,40 +243,16 @@ svg.grid({columns: 2, rows: 2, margin: 20}, (item) => {
 svg.draw();
 ```
 
+### `markup()`
+
+- `@return {String}` The html markup for the Graphic.
+
 ### `save(fileName, isPng)`
 
 Save the svg as a png.
 
 - `@param {String} fileName` The name of the file name.
 - `@param {Boolean} fileName` Save the file as a `.svg` or `.png`.
-
-### lerp(a, b, percent)
-
-Find the middle number between two numbers.
-
-```js
-lerp(0, 100, 0.5); // returns 50
-```
-
-### lerpColor()
-
-Find the middle color between two (hex format) colors.
-
-```js
-lerpColor('#000000', '#ffffff', 0.5); // returns #7F7F7F
-```
-
-### degrees(radians)
-
-Convert a number radians to degrees
-
-### radians(degrees)
-
-Convert a number degrees to radians
-
-### constrain(amount, min, max)
-
-Constrain a number between two numbers;
 
 ### `map(number, inMin, inMax, outMin, outMax)`
 
@@ -301,103 +271,29 @@ Get a random number between two numbers.
 - `@param {Number} min` The min of the range.
 - `@param {Number} max` The max of the range.
 
-### `smaller(numberOne, numberTwo)`
+### `lerp(a, b, percent)`
 
-Get the smaller number between two numbers.
-
-- `@param {Number} numberOne` The first number to compare.
-- `@param {Number} numberTwo` The second number to compare.
-
-### `bigger(numberOne, numberTwo)`
-
-Get the bigger number between two numbers.
-
-- `@param {Number} numberOne` The first number to compare.
-- `@param {Number} numberTwo` The second number to compare.
-
-### `spline(points, tension, close, callback) {)`
-
-- `@param {Array [Object]} points` Series of points with an x and y value. Defaults to `[]`.
-- `@param {Number} tension` tk. Defaults to `1`.
-- `@param {Boolean} close` tk. Defaults to `false`
-- `@param {Func} callback` tk.
+Find the middle number between two numbers.
 
 ```js
-// TODO: how to use tk
+lerp(0, 100, 0.5); // returns 50
 ```
 
-## Markup API
+### `lerpColor()`
 
-### `new Markup(options)`
-
-Creates a new instance. `options` is a JavaScript object with the following properties:
-
-- `@param {String} container` Selector or DOM element used as container for the SVG. Defaults to 'html'.
-- `@param {Number} fontsize` The font size for the document. Defaults to 16.
-
-### `$tag(content, attributes)`
-
-The library supports a majorty of html tags as the primary interface. In the example above we create a `<h1>` tag with it's content and add it to the document's `<body>`. This function is a wrapper around `this.head` and `this.body`
-
-- `@param {String} content` The content of the element.
-- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
-
-Nesting can be created when content is passed an array `[]`.
+Find the middle color between two (hex format) colors.
 
 ```js
-const page = new SCRIPT();
-
-page.ul([
-  //
-  page.li([
-    //
-    page.span('item'),
-    page.span('1'),
-  ]),
-  page.li('item 2'),
-  page.li('item 3'),
-]);
+lerpColor('#000000', '#ffffff', 0.5); // returns #7F7F7F
 ```
 
-### `head(tag, content, attributes)`
+### `degrees(radians)`
 
-Adds an element to the head of the document.
+Convert a number radians to degrees
 
-- `@param {String} tag` The tag of the element.
-- `@param {String} content` The content of the element.
-- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
+### `radians(degrees)`
 
-### `body(tag, content, attributes)`
-
-Adds an element to the body of the document.
-
-- `@param {String} tag` The tag of the element.
-- `@param {String} content` The content of the element.
-- `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
-
-### `comment(content)`
-
-Adds a comment to the head of the document.
-
-### `markup()`
-
-- `@return {String}` The html markup for the document.
-
-### `draw()`
-
-Draws the markup.
-
-### `remove()`
-
-Removes the markup.
-
-### `redraw()`
-
-Re-draws the markup.
-
-### `empty()`
-
-Empties the markup and resets the SCRIPT.
+Convert a number degrees to radians
 
 ## Contributing
 

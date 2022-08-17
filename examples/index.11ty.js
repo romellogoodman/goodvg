@@ -1,7 +1,7 @@
 const fs = require('fs');
-const {Markup} = require('../dist/goodgraphics.js');
+const Graphic = require('../dist/goodgraphics.js');
 
-const page = new Markup();
+const page = new Graphic({template: 'html'});
 
 let files = fs.readdirSync('./examples');
 
@@ -17,7 +17,12 @@ for (const fileIndex in files) {
   const file = files[fileIndex];
   const url = `./${file.replace('.11ty.js', '')}`;
 
-  page.a([page.p(url)], {href: url});
+  page.a(
+    () => {
+      page.p(url);
+    },
+    {href: url}
+  );
 }
 
 page.draw();

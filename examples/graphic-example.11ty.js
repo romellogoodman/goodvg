@@ -1,4 +1,4 @@
-const {Graphic} = require('../dist/goodgraphics.js');
+const Graphic = require('../dist/goodgraphics.js');
 
 const svg = new Graphic({
   attributes: {
