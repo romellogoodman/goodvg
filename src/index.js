@@ -54,6 +54,17 @@ const convertAttributes = (attributes = {}) => {
   return result;
 };
 
+const downloadURL = (name, url) => {
+  const link = document.createElement('a');
+
+  link.download = name;
+  link.href = url;
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
 class Graphic {
   constructor(options) {
     const {attributes, container, height, width, template, viewBox} =
