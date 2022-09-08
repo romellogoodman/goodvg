@@ -266,7 +266,7 @@ class Graphic {
 
     this.polyline(points, {
       ...attributes,
-      transform: `${opts.transform || ''} translate(${x} ${y})`,
+      transform: `${attributes.transform || ''} translate(${x} ${y})`,
     });
 
     return this;
