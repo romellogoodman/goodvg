@@ -40,18 +40,29 @@ const className = 'goodgraphics';
 
 const convertAttributes = (attributes = {}) => {
   if (attributes.style && typeof attributes.style === 'object') {
-    attributes.style = convertAttributes(attributes.style);
+    const styleString = Object.keys(attributes.style).reduce(
+      (result, attrib) => {
+        const property = attributes.style[attrib];
+
+        result += ` ${attrib}: ${property};`;
+
+        return result;
+      },
+      ''
+    );
+
+    attributes.style = styleString;
   }
 
-  let result = '';
-
-  Object.keys(attributes).forEach((attrib) => {
+  let attributesString = Object.keys(attributes).reduce((result, attrib) => {
     const property = attributes[attrib];
 
     result += ` ${attrib}="${property}"`;
-  });
 
-  return result;
+    return result;
+  }, '');
+
+  return attributesString;
 };
 
 const downloadURL = (name, url) => {
