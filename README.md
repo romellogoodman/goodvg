@@ -1,60 +1,18 @@
-# goodgraphics
+# goodvg
 
-[![npm version](https://badge.fury.io/js/goodgraphics.svg)](https://badge.fury.io/js/goodgraphics)
+A library for scripting html. [Learn more](https://mellogood.substack.com/p/goodgraphicsjs) about this library.
 
-A library for scripting html. Explore the API reference below and check out the [examples](/examples).
-
-## Table of contents
-
-- [Usage](#usage)
-- [API Reference](#api)
-- [Contributing](#contributing)
-
-## Usage
-
-### Install
-
-npm
-
-```
-npm i goodgraphics
-```
-
-unpkg
-
-```
-<script src="https://unpkg.com/goodgraphics"></script>
-```
-
-### Use
+## Use
 
 ```js
 const svg = new Graphic({
   attributes: {
-    fill: 'white',
-    style: 'background: #1b1b1b',
+    fill: "white",
+    style: "background: #1b1b1b",
   },
 });
 
-svg.circle('50%', '50%', 50);
-```
-
-### Templates
-
-For a more light-weight solution you can fork any of the following templates and get started quicker:
-
-- [Glitch Template](https://glitch.com/edit/#!/goodgraphics-template)
-- [CodeSandbox Template](https://codesandbox.io/s/good-graphics-template-vc099?file=/index.html)
-- [CodePen Template](https://codepen.io/romellogoodman/pen/bGBaZem)
-
-### Examples
-
-The examples are built on top of [`Eleventy`](https://www.11ty.dev/) and can be run using:
-
-```sh
-npm run dev
-
-npm run examples
+svg.circle("50%", "50%", 50);
 ```
 
 ## Graphic API
@@ -103,13 +61,13 @@ const page = new SCRIPT();
 page.ul(() => {
   page.li([
     //
-    page.span('item'),
-    page.span('1'),
+    page.span("item"),
+    page.span("1"),
   ]);
 
-  page.li('item 2');
+  page.li("item 2");
 
-  page.li('item 3');
+  page.li("item 3");
 });
 ```
 
@@ -184,7 +142,7 @@ Group the markup into a div or g element based on the Graphic's template.
 
 ```js
 svg.group(() => {
-  svg.circle('50%', '50%', '10%');
+  svg.circle("50%", "50%", "10%");
 });
 
 svg.draw();
@@ -212,7 +170,7 @@ Runs the draw function x number of times.
 const numberOfCircles = 4;
 
 svg.times(numberOfCircles, (index) => {
-  svg.circle(`${(index + 1) * 20}%`, '50%', '10%');
+  svg.circle(`${(index + 1) * 20}%`, "50%", "10%");
 });
 
 svg.draw();
@@ -234,8 +192,8 @@ Draw items across a grid. `options` is A JavaScript object with the following pr
 - `@param {Object} attributes` Key value pairs of attributes to apply to the tag.
 
 ```js
-svg.grid({columns: 2, rows: 2, margin: 20}, (item) => {
-  const {posX, posY, cellWidth} = item;
+svg.grid({ columns: 2, rows: 2, margin: 20 }, (item) => {
+  const { posX, posY, cellWidth } = item;
 
   svg.square(posX, posY, cellWidth);
 });
@@ -284,7 +242,7 @@ lerp(0, 100, 0.5); // returns 50
 Find the middle color between two (hex format) colors.
 
 ```js
-lerpColor('#000000', '#ffffff', 0.5); // returns #7F7F7F
+lerpColor("#000000", "#ffffff", 0.5); // returns #7F7F7F
 ```
 
 ### `degrees(radians)`
