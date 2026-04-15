@@ -1,32 +1,3 @@
-/**
- * List of methods that need to be bound to the Graphic instance
- * @type {string[]}
- */
-const funcsToBind = [
-  "body",
-  "circle",
-  "constructTag",
-  "constructTemplate",
-  "draw",
-  "ellipse",
-  "empty",
-  "group",
-  "head",
-  "line",
-  "markup",
-  "path",
-  "polygon",
-  "polyline",
-  "rect",
-  "redraw",
-  "remove",
-  "save",
-  "savePNG",
-  "saveSVG",
-  "setAttributes",
-  "square",
-  "triangle",
-];
 
 /**
  * Class name used for the root SVG or HTML element
@@ -41,23 +12,22 @@ const CLASSNAME = "goodvg";
  * @returns {string} String of HTML attributes formatted as 'key="value"'
  */
 const convertAttributes = (attributes = {}) => {
-  if (attributes.style && typeof attributes.style === "object") {
-    const styleString = Object.keys(attributes.style).reduce(
-      (result, attrib) => {
-        const property = attributes.style[attrib];
+  const attrs = { ...attributes };
 
-        result += ` ${attrib}: ${property};`;
+  if (attrs.style && typeof attrs.style === "object") {
+    const styleString = Object.keys(attrs.style).reduce((result, attrib) => {
+      const property = attrs.style[attrib];
 
-        return result;
-      },
-      ""
-    );
+      result += ` ${attrib}: ${property};`;
 
-    attributes.style = styleString;
+      return result;
+    }, "");
+
+    attrs.style = styleString;
   }
 
-  let attributesString = Object.keys(attributes).reduce((result, attrib) => {
-    const property = attributes[attrib];
+  let attributesString = Object.keys(attrs).reduce((result, attrib) => {
+    const property = attrs[attrib];
 
     result += ` ${attrib}="${property}"`;
 
@@ -111,9 +81,11 @@ class Graphic {
     this.width = width || 1200;
     this.viewBox = viewBox || `0 0 ${this.width} ${this.height}`;
 
-    // Bind functions to this
-    funcsToBind.forEach((func) => {
-      this[func] = this[func].bind(this);
+    // Bind all prototype methods to this instance
+    Object.getOwnPropertyNames(Graphic.prototype).forEach((key) => {
+      if (typeof this[key] === "function" && key !== "constructor") {
+        this[key] = this[key].bind(this);
+      }
     });
   }
 
@@ -259,7 +231,7 @@ class Graphic {
     ${body.join("\n")}
   </svg>`;
       default:
-        return head + body;
+        return head.join("\n") + body.join("\n");
     }
   }
 
@@ -504,18 +476,8 @@ class Graphic {
    * @param {string} svgText - The data URL of the SVG
    * @param {Object} [opts={}] - Additional options (currently unused)
    */
-  saveSVG(fileName, svgText, opts = {}) {
-    const link = document.createElement("a");
-
-    link.setAttribute("href", svgText);
-    link.setAttribute("download", fileName);
-
-    link.style.display = "none";
-    document.body.appendChild(link);
-
-    link.click();
-
-    document.body.removeChild(link);
+  saveSVG(fileName, svgText) {
+    downloadURL(fileName, svgText);
   }
 
   /**
