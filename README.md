@@ -113,9 +113,9 @@ All shape methods support method chaining and accept an optional `attributes` pa
 Draws a circle.
 
 **Parameters:**
-- `x` (number) - X-coordinate of the center
-- `y` (number) - Y-coordinate of the center
-- `radius` (number) - Radius of the circle
+- `x` (number|string) - X-coordinate of the center (numbers or SVG length strings like `"50%"`)
+- `y` (number|string) - Y-coordinate of the center
+- `radius` (number|string) - Radius of the circle
 - `attributes` (Object) - Additional SVG attributes
 
 **Example:**
@@ -127,29 +127,29 @@ svg.circle(100, 100, 50, { fill: 'red', stroke: 'black' });
 Draws an ellipse.
 
 **Parameters:**
-- `x` (number) - X-coordinate of the center
-- `y` (number) - Y-coordinate of the center
-- `width` (number) - Horizontal radius (rx)
-- `height` (number) - Vertical radius (ry)
+- `x` (number|string) - X-coordinate of the center
+- `y` (number|string) - Y-coordinate of the center
+- `width` (number|string) - Horizontal radius (rx)
+- `height` (number|string) - Vertical radius (ry)
 - `attributes` (Object) - Additional SVG attributes
 
 #### `rect(x, y, width, height, attributes)`
 Draws a rectangle.
 
 **Parameters:**
-- `x` (number) - X-coordinate of the top-left corner
-- `y` (number) - Y-coordinate of the top-left corner
-- `width` (number) - Width of the rectangle
-- `height` (number) - Height of the rectangle
+- `x` (number|string) - X-coordinate of the top-left corner
+- `y` (number|string) - Y-coordinate of the top-left corner
+- `width` (number|string) - Width of the rectangle
+- `height` (number|string) - Height of the rectangle
 - `attributes` (Object) - Additional SVG attributes
 
 #### `square(x, y, size, attributes)`
 Draws a square (convenience method).
 
 **Parameters:**
-- `x` (number) - X-coordinate of the top-left corner
-- `y` (number) - Y-coordinate of the top-left corner
-- `size` (number) - Width and height of the square
+- `x` (number|string) - X-coordinate of the top-left corner
+- `y` (number|string) - Y-coordinate of the top-left corner
+- `size` (number|string) - Width and height of the square
 - `attributes` (Object) - Additional SVG attributes
 
 #### `triangle(x, y, size, attributes)`
@@ -158,15 +158,15 @@ Draws an equilateral triangle.
 **Parameters:**
 - `x` (number) - X-coordinate of the center
 - `y` (number) - Y-coordinate of the center
-- `size` (number) - Size of the triangle (base width)
+- `size` (number) - Size of the triangle (base width — arithmetic is applied, so numbers only)
 - `attributes` (Object) - Additional SVG attributes
 
 #### `line(x1, y1, x2, y2, attributes)`
 Draws a line.
 
 **Parameters:**
-- `x1`, `y1` (number) - Start point coordinates
-- `x2`, `y2` (number) - End point coordinates
+- `x1`, `y1` (number|string) - Start point coordinates
+- `x2`, `y2` (number|string) - End point coordinates
 - `attributes` (Object) - Additional SVG attributes
 
 **Example:**
@@ -231,11 +231,20 @@ svg.save('my-graphic.svg', false);
 svg.save('my-graphic.png', true, { width: 2400, height: 2400 });
 ```
 
-#### `saveSVG(fileName, svgText, opts)`
-Saves the graphic as an SVG file.
+#### `saveSVG(fileName, svgText)`
+Low-level helper called by `save()` to download the graphic as an SVG file. Prefer `save(fileName, false)`.
+
+**Parameters:**
+- `fileName` (string) - Name for the downloaded file
+- `svgText` (string) - A `data:image/svg+xml;utf8,...` URL
 
 #### `savePNG(fileName, svgText, opts)`
-Saves the graphic as a PNG file.
+Low-level helper called by `save()` to download the graphic as a PNG file. Prefer `save(fileName, true, opts)`.
+
+**Parameters:**
+- `fileName` (string) - Name for the downloaded file
+- `svgText` (string) - A `data:image/svg+xml;utf8,...` URL
+- `opts` (Object) - Same `{ width, height }` shape as `save()`
 
 ## Examples
 
